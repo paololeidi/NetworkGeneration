@@ -1,0 +1,28 @@
+Parametri:
+Livelli complessità (1/3)
+
+Forme:
+Pipeline (i->q->o) 1i/1o
+Merge (i1->j<-i2) 2i/1o
+Split (o1<-i->o2) 1i/2o
+
+Query(1/25)
+Tutte 1i/1o
+Tranne join 2i/1o
+
+GetNetwork(num_inputs, num_outputs,complexity_levels=1)
+If complex=1
+    Shape=rand(pipeline/merge/split)
+    Switch shape
+    Case: pipeline
+        Input=rand(stream1/.../streamk)
+        Q1=getRandomQuery(a=2s)
+        Q2=getRandomQuery(a=4s)
+        Q3=getRandomQuery(a=10s)
+    Case: merge
+    Input1= getRandomStream()
+    Input2= getRandomStream(
+                     not=input1.name)
+    Q1=getRandomQuery(a,b)
+    Q2=getRandomQuery(a,b)
+   J=getJoinQuery(on=q1.get_window_close())
