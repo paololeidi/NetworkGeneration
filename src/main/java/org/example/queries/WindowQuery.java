@@ -44,7 +44,9 @@ public class WindowQuery extends Query {
     @Override
     public String toString() {
         return "WindowQuery{" +
-                "window=" + window +
+                "inputStream=" + inputStream +
+                ",\n window=" + window +
+                ",\n outputStream=" + outputStream +
                 '}';
     }
 }

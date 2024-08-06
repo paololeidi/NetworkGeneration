@@ -8,6 +8,9 @@ public class JoinQuery extends Query {
     private Stream inputStream1;
     private Stream inputStream2;
     private int joinWithinSeconds;
+
+
+
     private Stream outputStream;
 
     // Constructors
@@ -49,6 +52,14 @@ public class JoinQuery extends Query {
         this.joinWithinSeconds = joinWithinSeconds;
     }
 
+    @Override
+    public Stream getOutputStream() {
+        return outputStream;
+    }
+
+    public void setOutputStream(Stream outputStream) {
+        this.outputStream = outputStream;
+    }
     @Override
     public String toString() {
         return "JoinQuery{" +

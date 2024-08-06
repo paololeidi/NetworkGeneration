@@ -1,6 +1,6 @@
 package org.example.networks;
 
-import org.example.RandomQueryFactory;
+import org.example.RandomQueryGenerator;
 import org.example.Stream;
 import org.example.queries.WindowQuery;
 
@@ -15,10 +15,10 @@ public class Split {
 
     public Split(Stream inputStream) {
         this.inputStream = inputStream;
-        this.query1 = RandomQueryFactory.createRandomWindowQuery(inputStream);
+        this.query1 = RandomQueryGenerator.getRandomWindowQuery(inputStream);
         this.intermediateStream = query1.getOutputStream();
-        this.query2 = RandomQueryFactory.createRandomWindowQuery(intermediateStream);
-        this.query3 = RandomQueryFactory.createRandomWindowQuery(intermediateStream);
+        this.query2 = RandomQueryGenerator.getRandomWindowQuery(intermediateStream);
+        this.query3 = RandomQueryGenerator.getRandomWindowQuery(intermediateStream);
         outputStream1 = query2.getOutputStream();
         outputStream2 = query3.getOutputStream();
     }
