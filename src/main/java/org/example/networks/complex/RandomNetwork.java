@@ -1,9 +1,9 @@
 package org.example.networks.complex;
 
-import org.example.RandomQueryGenerator;
 import org.example.SPE;
 import org.example.Stream;
 import org.example.queries.Query;
+import org.example.windows.Window;
 
 import java.util.ArrayList;
 
@@ -16,9 +16,9 @@ public class RandomNetwork {
     private final SPE query3SPE;
 
     public RandomNetwork(ArrayList<Stream> availableStreams){
-        query1 = RandomQueryGenerator.getRandomQuery(availableStreams);
-        query2 = RandomQueryGenerator.getRandomQuery(query1.getOutputStream(),availableStreams);
-        query3 = RandomQueryGenerator.getRandomQuery(query2.getOutputStream(),availableStreams);
+        query1 = Query.getRandomQuery(availableStreams);
+        query2 = Query.getRandomQuery(query1.getOutputStream(),availableStreams);
+        query3 = Query.getRandomQuery(query2.getOutputStream(),availableStreams);
         this.query1SPE = SPE.getRandomSystem();
         this.query2SPE = SPE.getRandomSystem();
         this.query3SPE = SPE.getRandomSystem();
