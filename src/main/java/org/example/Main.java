@@ -3,7 +3,7 @@ package org.example;
 import org.example.networks.Merge;
 import org.example.networks.Pipeline;
 import org.example.networks.Split;
-import org.example.networks.complex.RandomNetworkGenerator;
+import org.example.networks.complex.RandomNetwork;
 
 import java.util.ArrayList;
 
@@ -25,8 +25,7 @@ public class Main {
         availableStreams.add(temperatureStream);
         Stream noiseStream = new Stream("Noise");
         availableStreams.add(noiseStream);
-        RandomNetworkGenerator rn = new RandomNetworkGenerator(availableStreams);
+        RandomNetwork rn = new RandomNetwork(availableStreams);
         System.out.println(rn);
     }
-
 }

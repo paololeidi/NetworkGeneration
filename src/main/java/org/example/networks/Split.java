@@ -1,15 +1,19 @@
 package org.example.networks;
 
 import org.example.RandomQueryGenerator;
+import org.example.SPE;
 import org.example.Stream;
 import org.example.queries.WindowQuery;
 
 public class Split {
     private Stream inputStream;
     private WindowQuery query1;
+    private SPE query1SPE;
     private Stream intermediateStream;
     private WindowQuery query2;
+    private SPE query2SPE;
     private WindowQuery query3;
+    private SPE query3SPE;
     private Stream outputStream1;
     private Stream outputStream2;
 
@@ -21,6 +25,9 @@ public class Split {
         this.query3 = RandomQueryGenerator.getRandomWindowQuery(intermediateStream);
         outputStream1 = query2.getOutputStream();
         outputStream2 = query3.getOutputStream();
+        this.query1SPE = SPE.getRandomSystem();
+        this.query2SPE = SPE.getRandomSystem();
+        this.query3SPE = SPE.getRandomSystem();
     }
 
     @Override
