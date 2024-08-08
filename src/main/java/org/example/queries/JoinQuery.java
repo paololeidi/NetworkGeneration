@@ -1,7 +1,10 @@
 package org.example.queries;
 
+import org.example.DataType;
 import org.example.Stream;
 import org.json.simple.JSONObject;
+
+import java.util.HashMap;
 
 public class JoinQuery extends Query {
 
@@ -22,10 +25,13 @@ public class JoinQuery extends Query {
         this.inputStream1 = inputStream1;
         this.inputStream2 = inputStream2;
         this.joinWithinSeconds = joinWithinSeconds;
-        this.outputStream = new Stream(inputStream1.getName()+
-                "_JOIN_"+inputStream2.getName()+
-                "_WITHIN_"+
-                joinWithinSeconds + "_SECONDS");
+        String name = inputStream1.getName() +
+                "_JOIN_" + inputStream2.getName() +
+                "_WITHIN_" +
+                joinWithinSeconds + "_SECONDS";
+        HashMap<String, DataType> schema = new HashMap<>();
+        // TODO determine schema
+        this.outputStream = new Stream(name,schema);
     }
 
     // Getters & setters

@@ -9,25 +9,48 @@ import org.json.simple.JSONObject;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
         ArrayList<Stream> availableStreams = new ArrayList<Stream>();
-        Stream stressStream = new Stream("Stress");
+
+        HashMap<String,DataType> stressSchema = new HashMap<>();
+        stressSchema.put("id",DataType.INT);
+        stressSchema.put("timestamp",DataType.TIMESTAMP);
+        stressSchema.put("status",DataType.STRING);
+        stressSchema.put("stressLevel",DataType.INT);
+        Stream stressStream = new Stream("Stress",stressSchema);
         availableStreams.add(stressStream);
+
         Pipeline p = new Pipeline(stressStream);
         System.out.println(p);
-        Stream weightStream = new Stream("Weight");
+        HashMap<String,DataType> weightSchema = new HashMap<>();
+        weightSchema.put("id",DataType.INT);
+        weightSchema.put("timestamp",DataType.TIMESTAMP);
+        weightSchema.put("weight",DataType.FLOAT);
+        Stream weightStream = new Stream("Weight",weightSchema);
         availableStreams.add(weightStream);
+
         Merge m = new Merge(stressStream,weightStream);
         System.out.println(m);
         Split s = new Split(stressStream);
         System.out.println(s);
 
-        Stream temperatureStream = new Stream("Temperature");
+        HashMap<String,DataType> temperatureSchema = new HashMap<>();
+        temperatureSchema.put("id",DataType.INT);
+        temperatureSchema.put("timestamp",DataType.TIMESTAMP);
+        temperatureSchema.put("temperature",DataType.FLOAT);
+        Stream temperatureStream = new Stream("Temperature",temperatureSchema);
         availableStreams.add(temperatureStream);
-        Stream noiseStream = new Stream("Noise");
+
+        HashMap<String,DataType> noiseSchema = new HashMap<>();
+        noiseSchema.put("id",DataType.INT);
+        noiseSchema.put("timestamp",DataType.TIMESTAMP);
+        noiseSchema.put("noise",DataType.FLOAT);
+        Stream noiseStream = new Stream("Noise",noiseSchema);
         availableStreams.add(noiseStream);
+
         RandomNetwork rn = new RandomNetwork(availableStreams);
         System.out.println(rn.toJson());
         JSONObject jo = rn.toJson();

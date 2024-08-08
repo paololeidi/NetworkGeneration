@@ -1,8 +1,11 @@
 package org.example.queries;
 
+import org.example.DataType;
 import org.example.Stream;
 import org.example.windows.Window;
 import org.json.simple.JSONObject;
+
+import java.util.HashMap;
 
 public class WindowQuery extends Query {
 
@@ -18,7 +21,12 @@ public class WindowQuery extends Query {
         this.inputStream = inputStream;
         this.window = window;
         String outputStream = inputStream.getName() + "_" + window.toString();
-        this.outputStream = new Stream(outputStream);
+        HashMap<String, DataType> schema = new HashMap<>();
+        schema.put("windowOpen",DataType.TIMESTAMP);
+        schema.put("windowClose",DataType.TIMESTAMP);
+        schema.put("id",DataType.INT);
+        // TODO schema.put("max_TO_DETERMINE","type_TO_DETERMINE"); determine from the input schema
+        this.outputStream = new Stream(outputStream,schema);
     }
 
     // Getters & setters
