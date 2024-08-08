@@ -4,7 +4,10 @@ import org.example.networks.Merge;
 import org.example.networks.Pipeline;
 import org.example.networks.Split;
 import org.example.networks.complex.RandomNetwork;
+import org.json.simple.JSONObject;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main {
@@ -26,6 +29,15 @@ public class Main {
         Stream noiseStream = new Stream("Noise");
         availableStreams.add(noiseStream);
         RandomNetwork rn = new RandomNetwork(availableStreams);
-        System.out.println(rn);
+        System.out.println(rn.toJson());
+        JSONObject jo = rn.toJson();
+        try {
+            FileWriter file = new FileWriter("files/network.json");
+            file.write(jo.toJSONString());
+            file.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }

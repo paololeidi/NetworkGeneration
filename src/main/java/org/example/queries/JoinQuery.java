@@ -1,6 +1,7 @@
 package org.example.queries;
 
 import org.example.Stream;
+import org.json.simple.JSONObject;
 
 public class JoinQuery extends Query {
 
@@ -55,6 +56,17 @@ public class JoinQuery extends Query {
     @Override
     public Stream getOutputStream() {
         return outputStream;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject jo = new JSONObject();
+        jo.put("type","join");
+        jo.put("inputStream1",inputStream1.getName());
+        jo.put("inputStream2",inputStream2.getName());
+        jo.put("joinWithinSeconds",joinWithinSeconds);
+        jo.put("outputStream",outputStream.getName());
+        return jo;
     }
 
     public void setOutputStream(Stream outputStream) {

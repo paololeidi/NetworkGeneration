@@ -2,6 +2,7 @@ package org.example.queries;
 
 import org.example.Stream;
 import org.example.windows.Window;
+import org.json.simple.JSONObject;
 
 public class WindowQuery extends Query {
 
@@ -48,5 +49,15 @@ public class WindowQuery extends Query {
                 ",\n window=" + window +
                 ",\n outputStream=" + outputStream +
                 '}';
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject jo = new JSONObject();
+        jo.put("type","window");
+        jo.put("inputStream",inputStream.getName());
+        jo.put("window",window.toJson());
+        jo.put("outputStream",outputStream.getName());
+        return jo;
     }
 }

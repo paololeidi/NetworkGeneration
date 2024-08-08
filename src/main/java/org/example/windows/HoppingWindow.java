@@ -1,5 +1,7 @@
 package org.example.windows;
 
+import org.json.simple.JSONObject;
+
 public class HoppingWindow extends Window {
     private int windowSizeSeconds;
     private int windowSlideSeconds;
@@ -28,5 +30,14 @@ public class HoppingWindow extends Window {
     @Override
     public String toString() {
         return "HOPPING("+windowSizeSeconds+","+windowSlideSeconds+")";
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject jo = new JSONObject();
+        jo.put("type","hopping");
+        jo.put("sizeSeconds",windowSizeSeconds);
+        jo.put("slideSeconds",windowSlideSeconds);
+        return jo;
     }
 }

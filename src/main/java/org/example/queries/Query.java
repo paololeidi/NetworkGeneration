@@ -6,6 +6,7 @@ import org.example.windows.HoppingWindow;
 import org.example.windows.SlidingWindow;
 import org.example.windows.TumblingWindow;
 import org.example.windows.Window;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -16,22 +17,24 @@ public abstract class Query extends Block {
 
     public abstract Stream getOutputStream();
 
+    public abstract JSONObject toJson();
+
     public static WindowQuery getRandomWindowQuery(Stream inputStream) {
         Random random = new Random();
         int randomIndex = random.nextInt(3); // 0, 1, or 2
-        Window window = new Window(){};
+        Window window;
         switch (randomIndex) {
             case 0:
                 window = new TumblingWindow(2);
-                break;
+                return new WindowQuery(inputStream, window);
             case 1:
                 window = new HoppingWindow(4,2);
-                break;
+                return new WindowQuery(inputStream, window);
             case 2:
                 window = new SlidingWindow(10);
-                break;
+                return new WindowQuery(inputStream, window);
         }
-        return new WindowQuery(inputStream, window);
+        return null;
     }
 
     public static Query getRandomQuery(ArrayList<Stream> availableStreams){

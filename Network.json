@@ -1,0 +1,27 @@
+{
+  "query1": {
+    "type": "window",
+    "inputStream": "stress",
+    "window": {
+      "type": "hopping",
+      "sizeSeconds": 10,
+      "slideSeconds": 2
+    },
+    "outputStream": "stress_HOPPING(10,2)",
+    "SPE": "Spark"
+  },
+  "query2": {
+    "type": "join",
+    "inputStream1": "stress_HOPPING(10,2)",
+    "inputStream2": "weight",
+    "joinWithinSeconds": 10,
+    "outputStream": "X_JOIN_Y_WITHIN_10S",
+    "SPE": "Flink"
+  },
+  "query3": {
+    "type": "window/join",
+    "inputStream": "temperature",
+    "outputStream": "ABRACADABRA",
+    "SPE": "RisingWave"
+  }
+}
