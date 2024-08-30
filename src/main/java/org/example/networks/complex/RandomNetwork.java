@@ -37,11 +37,11 @@ public class RandomNetwork {
     public JSONObject toJson(){
         JSONObject jo = new JSONObject();
         JSONObject query1JO = query1.toJson();
-        query1JO.put("SPE",query1SPE);
+        query1JO.put("SPE",query1SPE.toString());
         JSONObject query2JO = query2.toJson();
-        query2JO.put("SPE",query2SPE);
+        query2JO.put("SPE",query2SPE.toString());
         JSONObject query3JO = query3.toJson();
-        query3JO.put("SPE",query3SPE);
+        query3JO.put("SPE",query3SPE.toString());
         jo.put("query1",query1JO);
         jo.put("query2",query2JO);
         jo.put("query3",query3JO);

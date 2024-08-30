@@ -1,6 +1,7 @@
 package org.example.networks;
 
 import org.example.Stream;
+import org.example.queries.AggregateFunction;
 import org.example.queries.WindowQuery;
 import org.example.SPE;
 import org.example.windows.HoppingWindow;
@@ -18,9 +19,9 @@ public class Pipeline {
 
     public Pipeline(Stream inputStream){
         this.inputStream = inputStream;
-        query1 = new WindowQuery(inputStream,new SlidingWindow(2));
-        query2 = new WindowQuery(query1.getOutputStream(),new HoppingWindow(4,2));
-        query3 = new WindowQuery(query2.getOutputStream(),new TumblingWindow(10));
+        query1 = new WindowQuery(inputStream,new SlidingWindow(2),AggregateFunction.MAX);
+        query2 = new WindowQuery(query1.getOutputStream(),new HoppingWindow(4,2),AggregateFunction.MAX);
+        query3 = new WindowQuery(query2.getOutputStream(),new TumblingWindow(10),AggregateFunction.MAX);
         this.query1SPE = SPE.getRandomSystem();
         this.query2SPE = SPE.getRandomSystem();
         this.query3SPE = SPE.getRandomSystem();

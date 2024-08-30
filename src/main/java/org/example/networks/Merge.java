@@ -2,6 +2,7 @@ package org.example.networks;
 
 import org.example.SPE;
 import org.example.Stream;
+import org.example.queries.AggregateFunction;
 import org.example.queries.JoinQuery;
 import org.example.queries.WindowQuery;
 import org.example.windows.HoppingWindow;
@@ -20,8 +21,8 @@ public class Merge {
     public Merge(Stream inputStream1, Stream inputStream2){
         this.inputStream1 = inputStream1;
         this.inputStream2 = inputStream2;
-        this.windowQuery1 = new WindowQuery(inputStream1,new TumblingWindow(2));
-        this.windowQuery2 = new WindowQuery(inputStream2,new HoppingWindow(4,2));
+        this.windowQuery1 = new WindowQuery(inputStream1,new TumblingWindow(2),AggregateFunction.MAX);
+        this.windowQuery2 = new WindowQuery(inputStream2,new HoppingWindow(4,2),AggregateFunction.MAX);
         this.joinQuery = new JoinQuery(windowQuery1.getOutputStream(),windowQuery2.getOutputStream(),10);
         this.windowQuery1SPE = SPE.getRandomSystem();
         this.windowQuery2SPE = SPE.getRandomSystem();

@@ -20,21 +20,45 @@ public abstract class Query extends Block {
     public abstract JSONObject toJson();
 
     public static WindowQuery getRandomWindowQuery(Stream inputStream) {
+        Window window = getRandomWindow();
+        AggregateFunction aggFunction = getRandomAggregateFunction();
+        return new WindowQuery(inputStream, window, aggFunction);
+    }
+
+    private static AggregateFunction getRandomAggregateFunction() {
         Random random = new Random();
         int randomIndex = random.nextInt(3); // 0, 1, or 2
-        Window window;
+        AggregateFunction aggFunction = null;
+        switch (randomIndex) {
+            case 0:
+                aggFunction = AggregateFunction.MAX;
+                break;
+            case 1:
+                aggFunction = AggregateFunction.MIN;
+                break;
+            case 2:
+                aggFunction = AggregateFunction.SUM;
+                break;
+        }
+        return aggFunction;
+    }
+
+    private static Window getRandomWindow() {
+        Random random = new Random();
+        int randomIndex = random.nextInt(3); // 0, 1, or 2
+        Window window = null;
         switch (randomIndex) {
             case 0:
                 window = new TumblingWindow(2);
-                return new WindowQuery(inputStream, window);
+                break;
             case 1:
                 window = new HoppingWindow(4,2);
-                return new WindowQuery(inputStream, window);
+                break;
             case 2:
                 window = new SlidingWindow(10);
-                return new WindowQuery(inputStream, window);
+                break;
         }
-        return null;
+        return window;
     }
 
     public static Query getRandomQuery(ArrayList<Stream> availableStreams){

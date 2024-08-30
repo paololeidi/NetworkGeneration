@@ -13,11 +13,12 @@ public class WindowQuery extends Query {
     private Stream inputStream;
     private Window window;
     private Stream outputStream;
+    private AggregateFunction aggFunction;
 
     // Contructors
     public WindowQuery(){}
 
-    public WindowQuery(Stream inputStream, Window window){
+    public WindowQuery(Stream inputStream, Window window, AggregateFunction aggFunction){
         this.inputStream = inputStream;
         this.window = window;
         String outputStream = inputStream.getName() + "_" + window.toString();
@@ -27,6 +28,7 @@ public class WindowQuery extends Query {
         schema.put("id",DataType.INT);
         // TODO schema.put("max_TO_DETERMINE","type_TO_DETERMINE"); determine from the input schema
         this.outputStream = new Stream(outputStream,schema);
+        this.aggFunction = aggFunction;
     }
 
     // Getters & setters
